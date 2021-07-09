@@ -46,27 +46,19 @@
     </v-app-bar>
 
     <v-main>
-      <CustomTable
-          :headers="headers"
-          :items="desserts"
-          :record-actions="actions"
-          table-title="Desserts">
-        <template v-slot:header>
-          <h1>Here might be a page title</h1>
-        </template>
-      </CustomTable>
+      <TableContainer />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import CustomTable from "./components/Table";
 
+import TableContainer from "./components/TableContainer";
 export default {
   name: 'App',
 
   components: {
-    CustomTable,
+    TableContainer
   },
 
   data: () => ({

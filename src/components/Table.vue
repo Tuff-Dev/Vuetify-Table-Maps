@@ -3,12 +3,17 @@
     <v-data-table
       :headers="headers"
       :items="items"
-      :items-per-page="5"
       :dense="dense"
+      :options="tableOptions"
+      @pagination="optionsUpdated"
       class="elevation-2"
+      :server-items-length="totalItems"
       :caption="tableCaption"
       :loading="loading"
       :loading-text="loadingText"
+      :disable-pagination="externalPagination"
+      :disable-filtering="externalFiltering"
+      :disable-sort="externalSorting"
     >
       <!-- Template above the data table -->
       <template v-slot:top>
@@ -48,7 +53,7 @@
 
 <script>
 export default {
-  name: "custom-table",
+  name: "CustomTable",
   props: {
     tableTitle: {
       type: String,
@@ -86,9 +91,41 @@ export default {
       type: String,
       default: 'Loading...'
     },
+    externalPagination: {
+      type: Boolean,
+      default: false
+    },
+    externalSorting: {
+      type: Boolean,
+      default: false
+    },
+    externalFiltering: {
+      type: Boolean,
+      default: false
+    },
+    tableOptions: {
+      type: Object,
+      default: function () {
+        return {
+          page: 1,
+          itemsPerPage: 5,
+          sortBy: [],
+          sortDesc: [],
+          groupBy: [],
+          groupDesc: [],
+          multiSort: false,
+          mustSort: false,
+        }
+      }
+    },
+    totalItems: {
+      type: Number,
+      required: false
+    }
   },
   data() {
-    return {};
+    return {
+    };
   },
   methods: {
     editItem(item) {
@@ -103,6 +140,13 @@ export default {
       }
       return false;
     },
+    pageUpdateFunction(pageNumber) {
+      console.log('Page Updated')
+      console.log(pageNumber)
+    },
+    optionsUpdated(options) {
+      console.log(JSON.stringify(options))
+    }
   },
 };
 </script>
