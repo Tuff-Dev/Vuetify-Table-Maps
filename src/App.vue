@@ -46,19 +46,22 @@
     </v-app-bar>
 
     <v-main>
-      <TableContainer />
+<!--      <TableContainer />-->
+      <GMaps />
     </v-main>
   </v-app>
 </template>
 
 <script>
 
-import TableContainer from "./components/TableContainer";
+// import TableContainer from "./components/TableContainer";
+import GMaps from "./components/GMaps";
 export default {
   name: 'App',
 
   components: {
-    TableContainer
+    GMaps,
+    // TableContainer
   },
 
   data: () => ({
